@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PetaGram</string>
+    <string name="name">nombre</string>
+    <string name="rating">0</string>
+    <string name="cancelar">cancelar</string>
+    <string name="titulo">Petagram</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="btIngresar">Ingresar</string>
+</resources>
