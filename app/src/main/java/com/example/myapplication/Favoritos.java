@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,11 +30,25 @@ public class Favoritos extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
         this.setTitle(R.string.favoritos);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lista = (RecyclerView) findViewById(R.id.rvlistaFavoritos);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         lista.setLayoutManager(llm);
         iniciarAdaptador();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.principal:
+                Intent i = new Intent(this,MainActivity.class);
+                startActivity(i);
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void cargarMascotas(){
@@ -47,9 +63,6 @@ public class Favoritos extends AppCompatActivity{
         this.mascotas = temp;
     }
 
-    public void dialogo(View v){
-    }
-
     public void iniciarAdaptador(){
         MascotaAdaptador adaptador = new MascotaAdaptador(mascotas, new ClickListener() {
             @Override
@@ -57,6 +70,11 @@ public class Favoritos extends AppCompatActivity{
             }
         });
         lista.setAdapter(adaptador);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_favoritos, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }
